@@ -33,5 +33,16 @@ RSpec.describe 'Bulk Discount Create Page' do
       expect(page).to have_content(new_discount.min_item_quantity)
       expect(page).to have_content(new_discount.percent_off)
     end
+
+    it "I cannot create a new discount with incomplete information" do
+      visit "/merchant/discounts/new"
+
+      fill_in "Name", with: "10% off 25 or more items"
+      fill_in "Percent off", with: 10
+      click_on "Create Discount"
+
+      expect(current_path).to eq("/merchant/discounts/new")
+      expect(page).to have_content("Min item quantity is not a number")
+    end
   end
 end
