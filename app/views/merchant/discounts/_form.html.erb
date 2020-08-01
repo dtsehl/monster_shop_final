@@ -1,0 +1,12 @@
+<%= form_for object, url: url do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :min_item_quantity %>
+  <%= f.number_field :min_item_quantity %>
+
+  <%= f.label :percent_off %>
+  <%= f.number_field :percent_off %>
+
+  <%= f.submit "Create Discount" %>
+<% end %>
