@@ -40,7 +40,7 @@ When I visit the merchant dashboard ('/merchant')
 I see a link to view all bulk discounts
 When I click that link
 I am taken to '/merchant/discounts'
-Where I see the name, amount, item quantity (if applicable) and item value (if applicable) of each discount
+Where I see the name, min_item_quantity, percent off for each discount
 The name of the discount is a link to its show page ('/merchant/discounts/:discount_id')
 ```
 
@@ -51,10 +51,8 @@ As a merchant employee
 When I visit a discount's show page ('/merchant/discounts/:discount_id')
 I see the discount's:
 - name
-- amount
-- item quantity (if applicable)
-- item value (if applicable)
-- the name of the merchant it is associated with
+- min item quantity
+- percent off
 ```
 
 ```
@@ -67,9 +65,8 @@ When I click this link
 Then I am taken to '/merchant/discounts/new' where I see a form for a new bulk discount
 When I fill out the form with a new discount's:
 - name
-- amount
-- item quantity (if applicable)
-- item value (if applicable)
+- min item quantity
+- percent off
 When I click submit
 I see a flash message saying that a new bulk discount is created
 And I am returned to the discount index page where I see the new discount listed.
