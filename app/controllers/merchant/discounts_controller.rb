@@ -18,8 +18,8 @@ class Merchant::DiscountsController < Merchant::BaseController
       flash[:notice] = "Discount Created"
       redirect_to "/merchant/discounts"
     else
-      generate_flash(@discount)
-      render :new
+      flash[:error] = @discount.errors.full_messages.to_sentence
+      redirect_to request.referrer
     end
   end
 
