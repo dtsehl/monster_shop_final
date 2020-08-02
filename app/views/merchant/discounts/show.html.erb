@@ -1,3 +1,4 @@
 <h2><%= @discount.name %></h2>
 <p><%= @discount.min_item_quantity %></p>
 <p><%= @discount.percent_off %></p>
+<p><%= link_to "Update Discount", "/merchant/discounts/#{@discount.id}/edit" %></p>

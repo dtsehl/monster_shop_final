@@ -14,7 +14,7 @@ RSpec.describe 'Bulk Discount Index' do
       @discount_2 = @merchant_1.discounts.create!(name: "10% off 25 or more items", min_item_quantity: 25, percent_off: 10)
     end
 
-    it 'I can all bulk discounts from the bulk discount index page' do
+    it 'I can see all bulk discounts from the bulk discount index page' do
       visit '/merchant'
 
       click_link "View All Bulk Discounts"
