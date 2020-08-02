@@ -18,6 +18,10 @@ RSpec.describe 'Item Index Page' do
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 5)
       @order_3.order_items.create!(item: @nessie, price: @nessie.price, quantity: 7)
+      @discount_1 = @megan.discounts.create!(name: "5% off 20 or more items", min_item_quantity: 20, percent_off: 5)
+      @discount_2 = @megan.discounts.create!(name: "10% off 25 or more items", min_item_quantity: 25, percent_off: 10)
+      @discount_3 = @brian.discounts.create!(name: "10% off 25 or more items", min_item_quantity: 25, percent_off: 10)
+      @discount_4 = @brian.discounts.create!(name: "10% off 25 or more items", min_item_quantity: 25, percent_off: 10)
     end
     it 'I can see a list of all active items' do
       visit '/items'
@@ -67,6 +71,23 @@ RSpec.describe 'Item Index Page' do
       within '.statistics' do
         expect(page).to have_content("Most Popular Items:\n#{@hippo.name}: 8 sold #{@ogre.name}: 2 sold #{@giant.name}: 0 sold")
         expect(page).to have_content("Least Popular Items:\n#{@giant.name}: 0 sold #{@ogre.name}: 2 sold #{@hippo.name}: 8 sold")
+      end
+    end
+
+    it 'I see any discounts that are offered' do
+      visit items_path
+
+      within '.discounts' do
+        expect(page).to have_content("Merchants that offer discounts:")
+        expect(page).to have_content(@megan.name)
+        expect(page).to have_content(@brian.name)
+      end
+
+      within "#discount-#{@discount_1.id}" do
+        expect(page).to have_content(@discount_1.name)
+        expect(page).to have_content(@discount_1.min_item_quantity)
+        expect(page).to have_content(@discount_1.percent_off)
+        expect(page).to have_content(@discount_1.merchant.name)
       end
     end
   end
