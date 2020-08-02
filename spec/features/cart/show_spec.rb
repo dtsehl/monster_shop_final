@@ -10,6 +10,8 @@ RSpec.describe 'Cart Show Page' do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @discount_1 = @megan.discounts.create!(name: "5% off 3 or more items", min_item_quantity: 3, percent_off: 5)
+      @discount_2 = @megan.discounts.create!(name: "10% off 4 or more items", min_item_quantity: 4, percent_off: 10)
+      @discount_3 = @megan.discounts.create!(name: "20% off 5 or more items", min_item_quantity: 5, percent_off: 20)
     end
 
     describe 'I can see my cart' do
@@ -182,6 +184,27 @@ RSpec.describe 'Cart Show Page' do
         end
 
         expect(page).to have_content("Total: #{number_to_currency((@ogre.price * 3) / 1.05)}")
+      end
+
+      it "The greatest discount applies" do
+        visit item_path(@ogre)
+        click_button 'Add to Cart'
+        visit '/cart'
+        
+        within "#item-#{@ogre.id}" do
+          expect(page).to have_content("Subtotal: #{number_to_currency(@ogre.price * 1)}")
+          click_button('More of This!')
+          click_button('More of This!')
+          click_button('More of This!')
+        end
+
+        expect(page).to have_content("Total: #{number_to_currency(((@ogre.price * 4) / 1.1) + (@hippo.price * 1))}")
+
+        within "#item-#{@ogre.id}" do
+          click_button('More of This!')
+        end
+
+        expect(page).to have_content("Total: #{number_to_currency((@ogre.price * 5) / 1.2) + number_to_currency((@hippo.price))}")
       end
     end
   end
