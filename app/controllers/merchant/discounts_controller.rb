@@ -19,7 +19,7 @@ class Merchant::DiscountsController < Merchant::BaseController
       redirect_to "/merchant/discounts"
     else
       flash[:error] = @discount.errors.full_messages.to_sentence
-      redirect_to request.referrer
+      redirect_to "/merchant/discounts/new"
     end
   end
 
@@ -34,7 +34,7 @@ class Merchant::DiscountsController < Merchant::BaseController
       redirect_to "/merchant/discounts/#{@discount.id}"
     else
       flash[:error] = @discount.errors.full_messages.to_sentence
-      render :edit
+      redirect_to "/merchant/discounts/#{@discount.id}/edit"
     end
   end
 
