@@ -16,10 +16,10 @@ class Merchant::DiscountsController < Merchant::BaseController
     @discount = merchant.discounts.create(discount_params)
     if @discount.save
       flash[:notice] = "Discount Created"
-      redirect_to "/merchant/discounts"
+      redirect_to merchant_discounts_path
     else
       flash[:error] = @discount.errors.full_messages.to_sentence
-      redirect_to "/merchant/discounts/new"
+      redirect_to new_merchant_discount_path
     end
   end
 
@@ -31,11 +31,18 @@ class Merchant::DiscountsController < Merchant::BaseController
     @discount = Discount.find(params[:id])
     if @discount.update(discount_params)
       flash[:notice] = "Discount Updated"
-      redirect_to "/merchant/discounts/#{@discount.id}"
+      redirect_to merchant_discount_path
     else
       flash[:error] = @discount.errors.full_messages.to_sentence
-      redirect_to "/merchant/discounts/#{@discount.id}/edit"
+      redirect_to edit_merchant_discount_path
     end
+  end
+
+  def destroy
+    discount = Discount.find(params[:id])
+    discount.destroy
+    flash[:notice] = "Discount Deleted"
+    redirect_to merchant_discounts_path
   end
 
   private
