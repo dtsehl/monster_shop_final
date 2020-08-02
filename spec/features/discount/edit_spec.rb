@@ -31,5 +31,18 @@ RSpec.describe 'Bulk Discount Edit Page' do
       expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}")
       expect(page).to have_content("A new name")
     end
+
+    it 'I cannot update a discount with incomplete information' do
+      visit "/merchant/discounts/#{@discount_1.id}/edit"
+
+      fill_in "Name", with: ""
+
+      click_on "Update Discount"
+      expect(page).to have_content("Name can't be blank")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
+      expect(find("#discount_name").value).to eq("5% off 20 or more items")
+      expect(find("#discount_min_item_quantity").value.to_i).to eq(@discount_1.min_item_quantity)
+      expect(find("#discount_percent_off").value.to_i).to eq(@discount_1.percent_off)
+    end
   end
 end
