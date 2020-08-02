@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Bulk Discount Show Page' do
+RSpec.describe 'Bulk Discount Edit Page' do
   describe 'As an employee of a merchant' do
     before :each do
       @merchant_1 = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
@@ -13,15 +13,23 @@ RSpec.describe 'Bulk Discount Show Page' do
       @discount_1 = @merchant_1.discounts.create!(name: "5% off 20 or more items", min_item_quantity: 20, percent_off: 5)
     end
 
-    it 'I can see all information about a discount from its show page' do
-      visit "/merchant/discounts"
+    it 'I can edit the information of a discount' do
+      visit "/merchant/discounts/#{@discount_1.id}"
 
-      click_link @discount_1.name
+      click_link "Update Discount"
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
+
+
+      expect(find("#discount_name").value).to eq(@discount_1.name)
+      expect(find("#discount_min_item_quantity").value.to_i).to eq(@discount_1.min_item_quantity)
+      expect(find("#discount_percent_off").value.to_i).to eq(@discount_1.percent_off)
+
+      fill_in "Name", with: "A new name"
+
+      click_on "Update Discount"
+      expect(page).to have_content("Discount Updated")
       expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}")
-
-      expect(page).to have_content(@discount_1.name)
-      expect(page).to have_content(@discount_1.min_item_quantity)
-      expect(page).to have_content(@discount_1.percent_off)
+      expect(page).to have_content("A new name")
     end
   end
 end
