@@ -12,6 +12,7 @@ RSpec.describe Cart do
         @ogre.id.to_s => 1,
         @giant.id.to_s => 2
         })
+      @discount_1 = @megan.discounts.create!(name: "5% off 3 or more items", min_item_quantity: 3, percent_off: 5)
     end
 
     it '.contents' do
@@ -39,8 +40,14 @@ RSpec.describe Cart do
       expect(@cart.items).to eq([@ogre, @giant])
     end
 
-    it '.grand_total' do
+    it '.grand_total without discount' do
       expect(@cart.grand_total).to eq(120)
+    end
+
+    it '.grand_total with discount' do
+      @cart.add_item(@ogre.id.to_s)
+      @cart.add_item(@ogre.id.to_s)
+      expect(@cart.grand_total.round(2)).to eq(157.14)
     end
 
     it '.count_of()' do
@@ -62,6 +69,24 @@ RSpec.describe Cart do
       @cart.less_item(@giant.id.to_s)
 
       expect(@cart.count_of(@giant.id)).to eq(1)
+    end
+
+    it ".max_discount()" do
+      @cart.add_item(@ogre.id.to_s)
+      @cart.add_item(@ogre.id.to_s)
+      expect(@cart.max_discount(@ogre.id)).to eq(5)
+    end
+
+    it ".discount_to_denominator()" do
+      @cart.add_item(@ogre.id.to_s)
+      @cart.add_item(@ogre.id.to_s)
+      expect(@cart.discount_to_denominator(@ogre.id)).to eq(1.05)
+    end
+
+    it ".discounted_subtotal()" do
+      @cart.add_item(@ogre.id.to_s)
+      @cart.add_item(@ogre.id.to_s)
+      expect(@cart.discounted_subtotal(@ogre.id).round(2)).to eq(57.14)
     end
   end
 end
