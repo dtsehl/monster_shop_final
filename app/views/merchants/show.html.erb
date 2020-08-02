@@ -24,5 +24,14 @@
   <% end %>
 </section>
 
+<section class='discounts'>
+  <h2>Discounts Offered:</h2>
+  <% @merchant.discounts.each do |discount| %>
+    <p><%= discount.name %></p>
+    <p><%= discount.min_item_quantity %></p>
+    <p><%= discount.percent_off %></p>
+  <% end %>
+</section>
+
 <%= button_to 'Edit', "/merchants/#{@merchant.id}/edit", method: :get %>
 <%= button_to 'Delete', "/merchants/#{@merchant.id}", method: :delete  if @merchant.order_items.empty? %>

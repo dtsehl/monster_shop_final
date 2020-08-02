@@ -9,6 +9,26 @@
   <% end %>
 </section>
 
+<section class='discounts'>
+  <% if @merchants.present? %>
+    <h3>Merchants that offer discounts:</h3>
+    <% @merchants.each do |merchant| %>
+      <% if merchant.offers_discounts? %>
+        <h4><%= merchant.name %></h4>
+        <p>Discounts they offer: </p>
+        <% merchant.discounts.each do |discount| %>
+          <section id='discount-<%= discount.id%>'>
+          <h5>Discount Name: <%= discount.name %></h5>
+          <p>Discount Min Item Quantity: <%= discount.min_item_quantity %></p>
+          <p>Discount Percent Off: <%= discount.percent_off %></p>
+        <% end %>
+      <% else %>
+      <p>No merchants offer discounts at this time.</p>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>
+
 <% @items.each do |item| %>
   <section id='item-<%= item.id%>'>
     <h2><%= link_to item.name, "/items/#{item.id}" %></h2>

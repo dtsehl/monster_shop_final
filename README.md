@@ -118,7 +118,23 @@ And am redirected to the discount index page where I no longer see this discount
 ```
 
 ```
-User Story 8, Bulk discount applies to items in cart
+User Story 8, All discounts available are displayed on merchant show page
+
+As any user or visitor
+When I visit a merchant's show page
+I can see all discounts available to me offered by that merchant at the top of the page
+```
+
+```
+User Story 9, All discounts available are displayed on merchant items index page
+
+As any user or visitor
+When I visit a merchant's items index page
+I can see all discounts available to me offered by that merchant at the top of the page
+```
+
+```
+User Story 10, Bulk discount applies to items in cart
 
 As any non-admin user or visitor
 When I add items from a particular merchant to my cart which satisfy discount qualifications of that merchant
@@ -128,7 +144,7 @@ This discount is only applied to items from that merchant
 ```
 
 ```
-User Story 9, Bulk discount is taken away if qualifications stop being met
+User Story 11, Bulk discount is taken away if qualifications stop being met
 
 As any non-admin user or visitor
 When I add items from a particular merchant to my cart which satisfy discount qualifications of that merchant
@@ -138,7 +154,7 @@ Then I can see the discount is no longer applied
 ```
 
 ```
-User Story 10, Bulk discount only applies to items originally specified
+User Story 12, Bulk discount only applies to items originally specified
 
 As any non-admin user or visitor
 And there is a "5% off 5 items of the same type or more" discount available
@@ -148,7 +164,7 @@ The discount is applied only to that one item, not to the others
 ```
 
 ```
-User Story 11, The greatest discount applies
+User Story 13, The greatest discount applies
 
 As any non-admin user or visitor
 When I add items from a particular merchant to my cart which satisfy discount qualifications of two or more discounts from that merchant
@@ -156,30 +172,13 @@ In the Cart I should only see the greatest discount applied
 ```
 
 ```
-User Story 12, Bulk discount applies to items in order on its show page
+User Story 14, Bulk discount applies to items in order on its show page
 
 As any non-admin user or visitor
 When I add items from a particular merchant to my cart which satisfy discount qualifications of that merchant
 And I check out my cart and create an order
 I see that the discounted value of the items persists through to the order to its show page
 ```
-
-```
-User Story X, All discounts available are displayed on merchant show page
-
-As any user or visitor
-When I visit a merchant's show page
-I can see all discounts available to me offered by that merchant at the top of the page
-```
-
-```
-User Story X, All discounts available are displayed on merchant items index page
-
-As any user or visitor
-When I visit a merchant's items index page
-I can see all discounts available to me offered by that merchant at the top of the page
-```
-
 
 ---
 
