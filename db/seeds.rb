@@ -23,4 +23,6 @@ megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image:
 megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 brian.items.create!(name: 'Clothes', description: "Clothes!", price: 20, image: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/MTB_over_the_bar_crash.jpg', active: true, inventory: 10 )
-megan.discounts.create!(name: "5% off 3 or more items", min_item_quantity: 3, percent_off: 5)
+megan.discounts.create!(name: "5% off 3 or more of the same item", min_item_quantity: 3, percent_off: 5)
+megan.discounts.create!(name: "10% off 5 or more of the same item", min_item_quantity: 3, percent_off: 5)
+brian.discounts.create!(name: "10% off 3 or more of the same item", min_item_quantity: 3, percent_off: 10)
