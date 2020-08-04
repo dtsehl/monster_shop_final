@@ -35,6 +35,35 @@ RSpec.describe 'Create Order' do
         expect(page).to have_link(order.id)
       end
     end
+
+    it 'The discounts carry through to the order page' do
+      @megan.discounts.create!(name: "5% off 3 or more items", min_item_quantity: 3, percent_off: 5)
+      @brian.discounts.create!(name: "10% off 3 or more items", min_item_quantity: 3, percent_off: 10)
+      visit item_path(@ogre)
+      click_button 'Add to Cart'
+      visit item_path(@hippo)
+      click_button 'Add to Cart'
+
+      visit '/cart'
+
+      within "#item-#{@ogre.id}" do
+        click_button('More of This!')
+        click_button('More of This!')
+      end
+
+      within "#item-#{@hippo.id}" do
+        click_button('More of This!')
+        click_button('More of This!')
+      end
+
+      click_button 'Check Out'
+
+      order = Order.last
+
+      within "#order-#{order.id}" do
+        expect(page).to have_content("Total: $193.51")
+      end
+    end
   end
 
   describe 'As a Visitor' do
