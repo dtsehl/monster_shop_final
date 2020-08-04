@@ -50,11 +50,11 @@ class Cart
   end
 
   def discounted_subtotal(item_id)
-    subtotal_of(item_id) / discount_to_denominator(item_id)
+    subtotal_of(item_id) * discount_to_decimal(item_id)
   end
 
-  def discount_to_denominator(item_id)
-    ((max_discount(item_id) * 0.01) + 1).to_f
+  def discount_to_decimal(item_id)
+    1 - (max_discount(item_id) / 100.to_f)
   end
 
   def max_discount(item_id)
