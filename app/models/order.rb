@@ -3,6 +3,9 @@ class Order < ApplicationRecord
   has_many :items, through: :order_items
   belongs_to :user
 
+  has_many :order_discounts
+  has_many :discounts, through: :order_discounts
+
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
 
   def grand_total

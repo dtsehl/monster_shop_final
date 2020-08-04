@@ -172,7 +172,16 @@ In the Cart I should only see the greatest discount applied
 ```
 
 ```
-User Story 14, Bulk discount applies to items in order on its show page
+User Story 14, Bulk discount applies to order's index page
+
+As any non-admin user or visitor
+When I add items from a particular merchant to my cart which satisfy discount qualifications of that merchant
+And I check out my cart and create an order
+I see that the discounted value of the items persists through to the order to its show page
+```
+
+```
+User Story 15, Bulk discount applies order's show page
 
 As any non-admin user or visitor
 When I add items from a particular merchant to my cart which satisfy discount qualifications of that merchant

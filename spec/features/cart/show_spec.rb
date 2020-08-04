@@ -190,7 +190,7 @@ RSpec.describe 'Cart Show Page' do
         visit item_path(@ogre)
         click_button 'Add to Cart'
         visit '/cart'
-        
+
         within "#item-#{@ogre.id}" do
           expect(page).to have_content("Subtotal: #{number_to_currency(@ogre.price * 1)}")
           click_button('More of This!')
@@ -198,13 +198,13 @@ RSpec.describe 'Cart Show Page' do
           click_button('More of This!')
         end
 
-        expect(page).to have_content("Total: #{number_to_currency(((@ogre.price * 4) / 1.1) + (@hippo.price * 1))}")
+        expect(page).to have_content("Total: #{number_to_currency((@ogre.price * 4) / 1.1)}")
 
         within "#item-#{@ogre.id}" do
           click_button('More of This!')
         end
 
-        expect(page).to have_content("Total: #{number_to_currency((@ogre.price * 5) / 1.2) + number_to_currency((@hippo.price))}")
+        expect(page).to have_content("Total: #{number_to_currency((@ogre.price * 5) / 1.2)}")
       end
     end
   end

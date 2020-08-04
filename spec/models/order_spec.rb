@@ -5,6 +5,8 @@ RSpec.describe Order do
     it {should have_many :order_items}
     it {should have_many(:items).through(:order_items)}
     it {should belong_to :user}
+    it {should have_many :order_discounts}
+    it {should have_many(:discounts).through(:order_discounts)}
   end
 
   describe 'instance methods' do
