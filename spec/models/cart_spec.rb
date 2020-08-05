@@ -47,7 +47,7 @@ RSpec.describe Cart do
     it '.grand_total with discount' do
       @cart.add_item(@ogre.id.to_s)
       @cart.add_item(@ogre.id.to_s)
-      expect(@cart.grand_total.round(2)).to eq(157.14)
+      expect(@cart.grand_total.round(2)).to eq(157.0)
     end
 
     it '.count_of()' do
@@ -77,16 +77,16 @@ RSpec.describe Cart do
       expect(@cart.max_discount(@ogre.id)).to eq(5)
     end
 
-    it ".discount_to_denominator()" do
+    it ".discount_to_decimal()" do
       @cart.add_item(@ogre.id.to_s)
       @cart.add_item(@ogre.id.to_s)
-      expect(@cart.discount_to_denominator(@ogre.id)).to eq(1.05)
+      expect(@cart.discount_to_decimal(@ogre.id)).to eq(0.95)
     end
 
     it ".discounted_subtotal()" do
       @cart.add_item(@ogre.id.to_s)
       @cart.add_item(@ogre.id.to_s)
-      expect(@cart.discounted_subtotal(@ogre.id).round(2)).to eq(57.14)
+      expect(@cart.discounted_subtotal(@ogre.id).round(2)).to eq(57.0)
     end
   end
 end
